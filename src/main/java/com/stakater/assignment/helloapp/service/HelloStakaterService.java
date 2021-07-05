@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.stakater.assignment.helloapp.exception.HelloStakaterExecption;
+import com.stakater.assignment.helloapp.model.Response;
 
 @Service
 public class HelloStakaterService {
@@ -12,11 +13,15 @@ public class HelloStakaterService {
 	@Value("${stakater.name}")
 	private String name;
 
+	private static final String PREFIX = "Hello";
+
 	private static final String ERROR_MESSAGE = "No Name Found";
 
-	public String getName() throws HelloStakaterExecption {
+	public Response getName() throws HelloStakaterExecption {
 		if (StringUtils.hasText(name)) {
-			return name;
+			Response response = new Response();
+			response.setName(PREFIX + " " + name);
+			return response;
 		}
 		throw new HelloStakaterExecption(ERROR_MESSAGE);
 

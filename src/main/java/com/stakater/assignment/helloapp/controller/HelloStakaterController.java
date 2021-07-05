@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stakater.assignment.helloapp.exception.HelloStakaterExecption;
+import com.stakater.assignment.helloapp.model.Response;
 import com.stakater.assignment.helloapp.service.HelloStakaterService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/getName")
 public class HelloStakaterController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HelloStakaterController.class);
 	@Autowired
 	private HelloStakaterService helloStakaterService;
 
-	@GetMapping(value = "/getName", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> multicastEmailNotificationJob() throws HelloStakaterExecption {
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Response> multicastEmailNotificationJob() throws HelloStakaterExecption {
 		logger.info("Get Name");
 		return new ResponseEntity<>(helloStakaterService.getName(), HttpStatus.OK);
 	}
